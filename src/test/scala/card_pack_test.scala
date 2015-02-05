@@ -1,10 +1,9 @@
-import collection.mutable.Stack
 import org.scalatest._
 import scalaz._
 import Scalaz._
 import cardPackGen.Card_Pack_Gen
 
-class ExampleSpec extends FlatSpec with Matchers {
+class CardPackSpec extends FlatSpec with Matchers {
 
   "Card pack generator" should "generate card rarities at specific values" in {
     val gen = new Card_Pack_Gen
