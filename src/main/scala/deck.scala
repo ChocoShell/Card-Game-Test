@@ -7,7 +7,7 @@ class Deck {
   var decklist = List[Card]()
   def autofill() = 
     for(x <- decklist.length until 30)
-      decklist = decklist :+ new Card(x, "Counter", "", 1, 1)
+      decklist = decklist :+ new Card(x, "Counter"+x, "", 1, 1, 0)
 
   val rnd = new scala.util.Random
   def remove(num: card.Card, list: List[card.Card]) = list diff List(num)
@@ -25,6 +25,5 @@ class Deck {
     } else {
       List(draw)
     }
-
   }
 }
