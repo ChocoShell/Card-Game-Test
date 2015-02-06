@@ -10,14 +10,21 @@ class Deck {
       decklist = decklist :+ new Card(x, "Counter", "", 1, 1)
 
   val rnd = new scala.util.Random
-  
-  def draw(cards: Int = 1) = {
-    if(cards == 0) {
+  def remove(num: card.Card, list: List[card.Card]) = list diff List(num)
 
+  def draw : card.Card = {
+    val id = rnd.nextInt(decklist.length)
+    val drawCard = decklist(id)
+    decklist = remove(drawCard, decklist)
+    drawCard
+  }
+
+  def drawN(cards: Int = 1): List[card.Card] = {
+    if(cards > 1) {
+      List(draw) ::: drawN(cards - 1)
     } else {
-      val id = rnd.nextInt(30)
-      decklist = remove(decklist(id), decklist)
-      draw(cards - 1)
+      List(draw)
     }
+
   }
 }

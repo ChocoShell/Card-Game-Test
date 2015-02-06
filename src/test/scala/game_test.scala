@@ -2,16 +2,23 @@ import org.scalatest._
 import scalaz._
 import Scalaz._
 import game.Game
+import deck.Deck
 
 class GameSpec extends FlatSpec {
 
-  "A game" should "have turns" in {
-    val deckMaker1 = new Deck
-    val deckMaker2 = new Deck
+  "A game" should "give both players 3 cards" in {
+    val deck1 = new deck.Deck
+    val deck2 = new deck.Deck
 
-    val deck1 = (deckMaker1.autofill()).decklist
-    val deck2 = (deckMaker2.autofill()).decklist
+    deck1.autofill()
+    deck2.autofill()
 
-    assert(true)
+    val testgame = new game.Game(deck1, deck2)
+
+    val hand1 = testgame.playerOneHand
+    val hand2 = testgame.playerTwoHand
+
+    assert(hand1.length == 3)
+    assert(hand1.length == hand2.length)
   }
 }
