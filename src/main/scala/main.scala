@@ -12,6 +12,5 @@ object Main extends App {
   val hand1 = game1.playerOneHand
   val hand2 = game1.playerTwoHand
 
-  hand1 foreach println
-  hand2 foreach println
+  game1.gameLoop
 }
