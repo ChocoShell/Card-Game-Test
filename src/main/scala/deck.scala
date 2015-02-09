@@ -10,4 +10,6 @@ class Deck {
   def autofill() = 
     for(x <- decklist.length until 30)
       decklist = decklist :+ new Card(x, "Counter"+x, "", 1, 1, 0)
+
+  def length = decklist.length
 }

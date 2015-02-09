@@ -4,10 +4,8 @@ import deck.Deck
 
 class Player(dDeck : Deck) {
   val rnd = new scala.util.Random
-  var pDeck = dDeck
+  var pDeck = dDeck.decklist
   var life : Int = 20
-  
-  def length = pDeck.length
   
   def draw : card.Card = {
     def remove(num: card.Card, list: List[card.Card]) = 
@@ -26,5 +24,5 @@ class Player(dDeck : Deck) {
     else
       List(draw)
 
-  var hand = myDeck.drawN(3)  
+  var hand = drawN(3)  
 }

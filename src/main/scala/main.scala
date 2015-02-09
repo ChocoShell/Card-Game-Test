@@ -1,4 +1,5 @@
 import game.Game
+import player.Player
 
 object Main extends App {
   val deck1 = new deck.Deck

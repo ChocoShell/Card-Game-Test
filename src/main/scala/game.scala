@@ -2,14 +2,19 @@ package game
 
 import player.Player
 
-class Game(playerOne : Deck, playerTwo : Deck) {
+class Game(dPlayerOne : Player, dPlayerTwo : Player) {
+  val playerOne = dPlayerOne
+  val playerTwo = dPlayerTwo
+  
+
+  val rnd = new scala.util.Random
   var currentTurn = rnd.nextInt(2)
 
   def gameLoop = {
     // 100 total turns - 1 turn for testing
     var i = 0
     for(i <- 1 to 2) {
-      playerOne.hand = playerOne.hand :+ playerOne.myDeck.draw
+      playerOne.hand = playerOne.hand :+ playerOne.draw
       println("Current Hand of Player One")
       playerOne.hand foreach println
     }
