@@ -7,10 +7,13 @@ object Main extends App {
   deck1.autofill()
   deck2.autofill()
 
-  val game1 = new game.Game(deck1, deck2)
+  val playerOne = new Player(deck1)
+  val playerTwo = new Player(deck2)
 
-  val hand1 = game1.playerOneHand
-  val hand2 = game1.playerTwoHand
+  val game1 = new game.Game(playerOne, playerTwo)
+
+  val hand1 = game1.playerOne.hand
+  val hand2 = game1.playerTwo.hand
 
   game1.gameLoop
 }

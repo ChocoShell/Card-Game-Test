@@ -3,8 +3,28 @@ package player
 import deck.Deck
 
 class Player(dDeck : Deck) {
-  var myDeck = dDeck
+  val rnd = new scala.util.Random
+  var pDeck = dDeck
   var life : Int = 20
-  var hand = dDeck.drawN(3)
-  println(myDeck.length)
+  
+  def length = pDeck.length
+  
+  def draw : card.Card = {
+    def remove(num: card.Card, list: List[card.Card]) = 
+      list diff List(num)
+
+    val id = rnd.nextInt(pDeck.length)
+    val drawCard = pDeck(id)
+
+    pDeck = remove(drawCard, pDeck)
+    drawCard
+  }
+
+  def drawN(cards: Int = 1): List[card.Card] =
+    if(cards > 1)
+      List(draw) ::: drawN(cards - 1)
+    else
+      List(draw)
+
+  var hand = myDeck.drawN(3)  
 }
