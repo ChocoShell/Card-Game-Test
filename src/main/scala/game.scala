@@ -13,10 +13,14 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player) {
   def gameLoop = {
     // 100 total turns - 1 turn for testing
     var i = 0
-    for(i <- 1 to 2) {
+    for(i <- 1 to 1) {
       playerOne.hand = playerOne.hand :+ playerOne.draw
       println("Current Hand of Player One")
       playerOne.hand foreach println
+      print("Pick a Card to Play: ")
+      val something = Console.readLine()
+      println(playerOne.hand(something.toInt - 1).details)
+      // Player turn
     }
   }
   /*
