@@ -13,8 +13,5 @@ object Main extends App {
 
   val game1 = new game.Game(playerOne, playerTwo)
 
-  val hand1 = game1.playerOne.hand
-  val hand2 = game1.playerTwo.hand
-
   game1.gameLoop
 }

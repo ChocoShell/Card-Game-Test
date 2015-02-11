@@ -5,7 +5,6 @@ import player.Player
 class Game(dPlayerOne : Player, dPlayerTwo : Player) {
   val playerOne = dPlayerOne
   val playerTwo = dPlayerTwo
-  
 
   val rnd = new scala.util.Random
   var currentTurn = rnd.nextInt(2)
@@ -13,6 +12,8 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player) {
   def gameLoop = {
     // 100 total turns - 1 turn for testing
     var i = 0
+    playerOne.start
+    playerTwo.start
     for(i <- 1 to 1) {
       // Start Turn
       playerOne.mana += 1
@@ -20,32 +21,42 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player) {
       playerOne.hand = playerOne.hand :+ playerOne.draw
       // Player Can Do Stuff
       // Picking card loop/function
+      // Main Phase
       def turn(guy : Player) = {
         var in = ""
         while(in != "end") {
           println("What would you like to do?")
-          var in = Console.readLine()
+          in = Console.readLine()
           in match {
             case "hand" => {
-              println("Current Hand of Player One")
+              println("Current Hand:")
               guy.hand foreach println
               // Pick card to play stuff goes here
             }
+            case "field" => player.showField
             case "end" => println("Ending Turn")
             case "help" => println("end, or hand")
-            case "_" => println("Invalid Command, type 'help'")
+            case _ => println("Invalid Command, type 'help'")
           }
         }
-        
+
         println("Pick a Card to Play: ")
         val something = Console.readLine()
-        println(guy.hand(something.toInt - 1).details)
+        val selCard = guy.hand(something.toInt - 1)
+        println(selCard.details)
         println("Play This Card? ")  
+
+        val playcard = Console.readLine()
+
+        playcard match {
+          case "yes" => player.play(selCard)
+          case "no" => println("Ok")
+        }
       }
-      // Main Phase
+      turn(playerOne)
       // Combat Phase
+      // End Phase
       // End Turn
-      // Player turn
     }
   }
   /*
