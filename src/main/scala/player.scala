@@ -45,10 +45,4 @@ class Player(dDeck : Deck) {
     aMana -= dCard.cost
     field = field :+ dCard
   }
-
-  def showField = {
-    println("Showing Field")
-    field foreach println
-    println
-  }
 }
