@@ -23,6 +23,7 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player) {
       // Picking card loop/function
       // Main Phase
       def turn(guy : Player) = {
+        // CLI testing stuff
         var in = ""
         while(in != "end") {
           println("What would you like to do?")
@@ -31,27 +32,29 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player) {
             case "hand" => {
               println("Current Hand:")
               guy.hand foreach println
+              println
               // Pick card to play stuff goes here
             }
-            case "field" => player.showField
+            case "field" => guy.showField
             case "end" => println("Ending Turn")
             case "help" => println("end, or hand")
             case _ => println("Invalid Command, type 'help'")
           }
         }
-
-        println("Pick a Card to Play: ")
+        println("\nPick a Card to Play: ")
         val something = Console.readLine()
         val selCard = guy.hand(something.toInt - 1)
         println(selCard.details)
-        println("Play This Card? ")  
+        println("\nPlay This Card? ")  
 
         val playcard = Console.readLine()
 
         playcard match {
-          case "yes" => player.play(selCard)
+          case "yes" => guy.play(selCard)
           case "no" => println("Ok")
         }
+        guy.showField
+        // End of CLI
       }
       turn(playerOne)
       // Combat Phase

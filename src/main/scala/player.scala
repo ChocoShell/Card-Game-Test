@@ -5,12 +5,12 @@ import card.Card
 
 class Player(dDeck : Deck) {
   
-  var life : Int;
-  var mana : Int;
-  var aMana : Int;
-  var hand : List[Card];
-  var pDeck : List[Card];
-  var field : List[Card];
+  var life : Int = 20;
+  var mana : Int = 0;
+  var aMana : Int = 0;
+  var hand : List[Card] = List[Card]();
+  var pDeck : List[Card] = List[Card]();
+  var field : List[Card] = List[Card]();
   
   def draw : Card = {
     val rnd = new scala.util.Random
@@ -49,5 +49,6 @@ class Player(dDeck : Deck) {
   def showField = {
     println("Showing Field")
     field foreach println
+    println
   }
 }

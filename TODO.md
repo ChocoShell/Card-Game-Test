@@ -24,6 +24,7 @@ Card Packs Section needs a RNG to determine the frequency at which cards show up
 A game class keeps track of the current game state:
 - Keep track of the field(creatures, buffs, etc).
 - Game modes
+- CLI should be moved into a separate class.
 
 ### Player Class
 Holds information about:
