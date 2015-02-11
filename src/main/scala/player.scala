@@ -6,6 +6,8 @@ class Player(dDeck : Deck) {
   val rnd = new scala.util.Random
   var pDeck = dDeck.decklist
   var life : Int = 20
+  var mana : Int = 0
+  var hand = List[Card]()
   
   def draw : card.Card = {
     def remove(num: card.Card, list: List[card.Card]) = 
@@ -24,5 +26,6 @@ class Player(dDeck : Deck) {
     else
       List(draw)
 
-  var hand = drawN(3)  
+  def start = 
+    hand = drawN(3)
 }

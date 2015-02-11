@@ -14,12 +14,37 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player) {
     // 100 total turns - 1 turn for testing
     var i = 0
     for(i <- 1 to 1) {
+      // Start Turn
+      playerOne.mana += 1
+      // Draw Phase
       playerOne.hand = playerOne.hand :+ playerOne.draw
-      println("Current Hand of Player One")
-      playerOne.hand foreach println
-      print("Pick a Card to Play: ")
-      val something = Console.readLine()
-      println(playerOne.hand(something.toInt - 1).details)
+      // Player Can Do Stuff
+      // Picking card loop/function
+      def turn(guy : Player) = {
+        var in = ""
+        while(in != "end") {
+          println("What would you like to do?")
+          var in = Console.readLine()
+          in match {
+            case "hand" => {
+              println("Current Hand of Player One")
+              guy.hand foreach println
+              // Pick card to play stuff goes here
+            }
+            case "end" => println("Ending Turn")
+            case "help" => println("end, or hand")
+            case "_" => println("Invalid Command, type 'help'")
+          }
+        }
+        
+        println("Pick a Card to Play: ")
+        val something = Console.readLine()
+        println(guy.hand(something.toInt - 1).details)
+        println("Play This Card? ")  
+      }
+      // Main Phase
+      // Combat Phase
+      // End Turn
       // Player turn
     }
   }
