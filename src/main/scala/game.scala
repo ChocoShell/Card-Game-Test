@@ -2,7 +2,7 @@ package game
 
 import player.Player
 
-class Game(dPlayerOne : Player, dPlayerTwo : Player, turn: (Player) => Unit) {
+class Game(dPlayerOne : Player, dPlayerTwo : Player, turn: (Player, Player) => Unit) {
   val playerOne = dPlayerOne
   val playerTwo = dPlayerTwo
 
@@ -27,28 +27,12 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player, turn: (Player) => Unit) {
       // Player Can Do Stuff
       // Picking card loop/function
       // Main Phase
-      turn(playerOne)
+      turn(playerOne, playerTwo)
 
       // Combat Phase
 
       // End Phase
       // End Turn
     }
-  }
-  /*
-  start game function 
-  - Decide who goes first - Already decided up top.
-  - game loop
-    - Player 1 Turn
-      - Give Mana
-      - Reset Mana
-      - Draw card for Player
-      - Give Control to Player
-        - Player plays cards
-        - Player attacks
-        - Player Ends Turn
-      - Turn ends due to Timer
-    - Player 2 Turn
-    - If Life Total is 0 or less that player loses.
-  */  
+  }  
 }
