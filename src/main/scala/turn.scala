@@ -33,6 +33,7 @@ object Turn {
     }
 
     def attack(one : Player, two : Player) : Unit = {
+      println("Entering Attack Phase")
       for(monster <- one.field) {two.life -= monster.power}
       print("Defending player left with: ")
       println(two.life)
@@ -55,14 +56,14 @@ object Turn {
           guy.hand foreach println
           println
           // Pick card to play stuff goes here
-          println("\nPick a Card to Play: ")
+          println("Pick a Card to Play: ")
           // Input
           val something = Console.readLine()
           // Understanding Input
           val selCard = guy.hand(something.toInt - 1)
           // Dependent Output
           println(details(selCard))
-          println("\nPlay This Card? ")  
+          println("Play This Card? ")  
            // Input
           val playcard = Console.readLine()
 
@@ -75,8 +76,12 @@ object Turn {
         }
         case "field" => guy.field foreach println
         case "end" => println("Ending Turn")
-        case "help" => println("end, hand, field, attack")
-        case "attack" => attack(guy, otherGuy)
+        case "help" => println("end, hand, field, attack, mana")
+        case "mana" => println("Total Mana: " + guy.mana + "\nAvailable Mana: " + guy.aMana)
+        case "attack" => {
+          attack(guy, otherGuy)
+          in = "end"
+        }
         case _ => println("Invalid Command, type 'help'")
       }
     }

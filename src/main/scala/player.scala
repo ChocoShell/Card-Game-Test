@@ -12,11 +12,12 @@ class Player(dDeck : Deck) {
   var pDeck : List[Card] = List[Card]();
   var field : List[Card] = List[Card]();
   
+  def remove(num: Card, list: List[Card]) = 
+      list diff List(num)
+  
   def draw : Card = {
     val rnd = new scala.util.Random
-    def remove(num: Card, list: List[Card]) = 
-      list diff List(num)
-
+    
     val id = rnd.nextInt(pDeck.length)
     val drawCard = pDeck(id)
 
@@ -42,6 +43,7 @@ class Player(dDeck : Deck) {
   }
 
   def play(dCard : Card) = {
+    hand = remove(dCard, hand)
     aMana -= dCard.cost
     field = field :+ dCard
   }
