@@ -78,6 +78,7 @@ object Turn {
           val something = Console.readLine()
           // Understanding Input
           val selCard = guy.hand(something.toInt - 1)
+          
           // Dependent Output
           println(cardDetails(selCard))
           println("Play This Card? ")  
@@ -87,15 +88,22 @@ object Turn {
           // Input dependent Output
           playcard match {
             case "yes" => guy.play(selCard)
-            case "no" => println("Ok")
+            case "no" => println("No card played.")
+            case _ => println("Invalid command, no card played.")
           }
           guy.field foreach println   
         }
         case "field" => guy.field foreach println
         case "end" => println("Ending Turn")
         case "help" => println("end, hand, field, attack, mana")
-        case "mana" => println("Total Mana: " + guy.mana + "\nAvailable Mana: " + guy.aMana)
-        case "life" => println("Life: " + guy.life + "\nOpponent's Life: " + otherGuy.life)
+        case "mana" => {
+          println("Total Mana: " + guy.mana + "\nAvailable Mana: " + guy.aMana)
+          println("Opponent's Mana: " + otherGuy.mana)
+        }
+        case "life" => {
+          println("Life: " + guy.life)
+          println("Opponent's Life: " + otherGuy.life)
+        }
         case "attack" => {
           attack(guy, otherGuy)
           in = "end"
