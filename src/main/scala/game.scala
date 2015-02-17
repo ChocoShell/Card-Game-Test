@@ -28,7 +28,6 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player, turn: (Player, Player) => U
       // Picking card loop/function
       // Main Phase
       turn(playerOne, playerTwo)
-
       // Combat Phase
 
       // End Phase
