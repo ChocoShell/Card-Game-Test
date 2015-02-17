@@ -47,4 +47,6 @@ class Player(dDeck : Deck) {
     aMana -= dCard.cost
     field = field :+ dCard
   }
+
+  def hand2String = "Current Hand:\n" + hand.mkString("\n") + "\n"
 }

@@ -69,33 +69,45 @@ object Turn {
       // Dependent Output
       in match {
         case "hand" => {
-          println("Current Hand:")
-          guy.hand foreach println
-          println
-          // Pick card to play stuff goes here
-          println("Pick a Card to Play: ")
-          // Input
-          val something = Console.readLine()
-          // Understanding Input
-          val selCard = guy.hand(something.toInt - 1)
-          
-          // Dependent Output
-          println(cardDetails(selCard))
-          println("Play This Card? ")  
-           // Input
-          val playcard = Console.readLine()
+          if(guy.hand.isEmpty) {
+            println("Hand is Empty")
+          } else {
+            println(guy.hand2String)
 
-          // Input dependent Output
-          playcard match {
-            case "yes" => guy.play(selCard)
-            case "no" => println("No card played.")
-            case _ => println("Invalid command, no card played.")
+            // Pick card to play stuff goes here
+            println("Pick a Card to Play: ")
+            // Input
+            val something = Console.readLine()
+
+            // Understanding Input
+            try { 
+              val index = something.toInt
+              val selCard = guy.hand(index - 1)
+              // Dependent Output
+              println(cardDetails(selCard))
+              println("Play This Card? ")
+
+               // Input
+              val playcard = Console.readLine()
+
+              // Input dependent Output
+              playcard match {
+                case "yes" => guy.play(selCard)
+                case "no" => println("No card played.")
+                case _ => println("Invalid command, no card played.")
+              }
+
+              guy.field foreach println   
+            } catch {
+              case nfe: NumberFormatException => println("Number Not Entered")
+              case iobe: IndexOutOfBoundsException => println("Index Out of Bounds")
+              case e: Exception => println("Some Error Occurred")
+            }
           }
-          guy.field foreach println   
         }
         case "field" => guy.field foreach println
         case "end" => println("Ending Turn")
-        case "help" => println("end, hand, field, attack, mana")
+        case "help" => println("hand, field, mana, attack and end")
         case "mana" => {
           println("Total Mana: " + guy.mana + "\nAvailable Mana: " + guy.aMana)
           println("Opponent's Mana: " + otherGuy.mana)
@@ -108,7 +120,7 @@ object Turn {
           attack(guy, otherGuy)
           in = "end"
         }
-        case _ => println("Invalid Command, type 'help'")
+        case _ => println("Invalid Command, type 'help' for list of commands.")
       }
     }
   }  
