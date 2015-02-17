@@ -10,28 +10,18 @@ class Game(dPlayerOne : Player, dPlayerTwo : Player, turn: (Player, Player) => U
   var currentTurn = rnd.nextInt(2)
 
   def gameLoop = {
-    // 100 total turns - 1 turn for testing
+    // 100 total turns - 2 turns for testing
     var i = 0
     playerOne.start
     playerTwo.start
-    for(i <- 1 to 1) {
-      
-      // Start Turn
-      playerOne.mana += 1
-
-      playerOne.aMana = playerOne.mana      
-      
-      // Draw Phase
-      playerOne.hand = playerOne.hand :+ playerOne.draw
-      
-      // Player Can Do Stuff
-      // Picking card loop/function
-      // Main Phase
-      turn(playerOne, playerTwo)
-      // Combat Phase
-
-      // End Phase
-      // End Turn
+    for(i <- 1 to 2) {
+      if(currentTurn == 1) {
+        turn(playerOne, playerTwo)
+        currentTurn = 0
+      } else if (currentTurn == 0) {
+        turn(playerTwo, playerOne)
+        currentTurn = 1
+      }
     }
   }  
 }

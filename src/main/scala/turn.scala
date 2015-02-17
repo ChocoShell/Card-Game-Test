@@ -4,31 +4,35 @@ import player.Player
 import card.Card
 
 /* Turns should let players:
-    - Look at their hand, mana, available mana, field
+    - Look at their:
+      - Total Mana
+      - Field
+      - Life
+    and those things of your opponent.
+    - Players also see:
+      - Hand
+      - Available Mana
     - Play Cards From their hand
 */
 object Turn {
-  
+ 
   // CLI Function
   /*
-  start game function 
-  - Decide who goes first - Already decided up top.
-  - game loop
     - Player 1 Turn
       + Give Mana
       + Reset Mana
       + Draw card for Player
       + Give Control to Player
         + Player plays cards
-        - Player attacks
-        - Player Ends Turn
+        + Player attacks
+        + Player Ends Turn
       - Turn ends due to Timer
-    - Player 2 Turn
+    + Player 2 Turn
     - If Life Total is 0 or less that player loses.
   */
   def turnCLI(guy : Player, otherGuy : Player) : Unit = {
     // Print Card Details to Screen
-    def details(that : Card) : String = {
+    def cardDetails(that : Card) : String = {
       var allDetails = "\nName: " + that.name + "\n"
       allDetails = allDetails + "Effect: " + that.effect + "\n"
       allDetails = allDetails + "Power: " + that.power + "\n"
@@ -44,6 +48,14 @@ object Turn {
       println(two.life)
     }
 
+    // Start Turn
+    guy.mana += 1
+
+    guy.aMana = guy.mana      
+        
+    // Draw Phase
+    guy.hand = guy.hand :+ guy.draw
+    
     // CLI testing stuff
     var in = ""
     while(in != "end") {
@@ -67,7 +79,7 @@ object Turn {
           // Understanding Input
           val selCard = guy.hand(something.toInt - 1)
           // Dependent Output
-          println(details(selCard))
+          println(cardDetails(selCard))
           println("Play This Card? ")  
            // Input
           val playcard = Console.readLine()
@@ -83,6 +95,7 @@ object Turn {
         case "end" => println("Ending Turn")
         case "help" => println("end, hand, field, attack, mana")
         case "mana" => println("Total Mana: " + guy.mana + "\nAvailable Mana: " + guy.aMana)
+        case "life" => println("Life: " + guy.life + "\nOpponent's Life: " + otherGuy.life)
         case "attack" => {
           attack(guy, otherGuy)
           in = "end"
