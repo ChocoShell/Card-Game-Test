@@ -2,6 +2,7 @@ package game
 
 import player.Player
 
+// Game takes 2 player objects and a turn function
 class Game(dPlayerOne : Player, dPlayerTwo : Player, turn: (Player, Player) => Unit) {
   val playerOne = dPlayerOne
   val playerTwo = dPlayerTwo

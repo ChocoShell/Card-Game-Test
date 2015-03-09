@@ -14,6 +14,7 @@ import card.Card
       - Available Mana
     - Play Cards From their hand
 */
+// Turn functions allows users to interact with player and game objects.
 object Turn {
  
   // CLI Function
